@@ -1,16 +1,25 @@
 import getTeamsByGroup from '@salesforce/apex/GroupTeams.getTeamsByGroup';
-import getTeams from '@salesforce/apex/GroupTeams.getTeams';
+import getTeam from '@salesforce/apex/TeamData.getTeam';
 import { LightningElement, wire, api} from 'lwc';
 
 export default class TeamList extends LightningElement {
 
     teams = [];
 
+    teamsData = [];
+
     @api recordId;
     @wire(getTeamsByGroup, { groupId: '$recordId' })
     teamsDetailsHandler({data, error}){
         //console.log("###############", JSON.stringify(data));
         this.teams = data;
+    }
+
+    @wire(getTeam)
+    teamsDataHandler({data, error}){
+        //console.log("###############", JSON.stringify(data));
+        console.log("111111111 details and points ", data)
+        this.teamsData = data;
     }
 
     //@wire(getTeams)
