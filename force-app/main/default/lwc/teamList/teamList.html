@@ -1,0 +1,18 @@
+<template>
+    <template if:true={teams}>
+        <template for:each={teamNames} for:item="teamName"></template>
+        <lightning-datatable 
+            data={teams}
+            columns={columns}
+        >
+        </lightning-datatable>
+    </template>
+        <!-- <ul>
+            
+                <li key={teamName}>{teamName}</li>
+           
+        </ul> -->
+    <template if:false={teams}>
+        <p>No teams found.</p>
+    </template>
+</template>
