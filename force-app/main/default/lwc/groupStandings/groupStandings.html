@@ -1,3 +1,26 @@
 <template>
-    
+    <template for:each={groupStanding} for:item="group">
+        <div key={group.group} class="group-container">
+            <!-- Group Card for navigation -->
+            <lightning-card 
+                title={group.group} 
+                class="group-card" 
+                onclick={navigateToGroupRecord} 
+                data-group-id={group.Id}>
+            </lightning-card>
+            
+            <!-- Datatable for Teams -->
+            <lightning-card title="Teams" class="team-card">
+                <div class="table-wrapper">
+                    <lightning-datatable 
+                        key-field="id"
+                        data={group.teams}
+                        columns={columns}
+                        class="custom-table"
+                        onrowaction={handleRowAction}>
+                    </lightning-datatable>
+                </div>
+            </lightning-card>
+        </div>
+    </template>
 </template>

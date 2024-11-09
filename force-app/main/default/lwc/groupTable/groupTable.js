@@ -26,22 +26,8 @@ export default class GroupTable extends LightningElement {
     @track currentGroup;
     @track groupList;
     error;
-    // data = [
-    //     { team: 'Netherlands', wins: 2, draws: 1, losses: 0, points: 5, goalsFor: 5, goalsAgainst: 1, goalDifference: 4 },
-    //     // ... other teams
-    // ];
 
-    // @wire(getTeamsByGroup, { groupId: '$recordId' })
-    // teamsDetailsHandler(value){
-    //     const {data, error}  = value;
-        
-    //     if(data){
-    //         this.record = data
-    //         console.log("###############", data);
-    //         return data;
-    //     }
-    // }
-
+    
     @wire(getRecord, { recordId: '$recordId', fields: [TOURNAMENT_GROUP_NAME_FIELD] })
     store({ error, data }) {
         if (data) {

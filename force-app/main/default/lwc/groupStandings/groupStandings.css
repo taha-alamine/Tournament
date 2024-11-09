@@ -1,0 +1,83 @@
+.group-container {
+    margin-bottom: 20px;
+}
+
+.group-card {
+    background: #f4f6f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.group-card {
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.group-card:hover {
+    background-color: #f4f6f9;
+}
+.table-wrapper {
+    padding: 16px;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Styles for the table */
+.custom-table .slds-table {
+    border: none;
+    font-size: 0.875rem;
+    color: #333;
+}
+
+.custom-table .slds-table thead th {
+    background-color: #0070d2; /* Salesforce Blue */
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+.custom-table .slds-table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.custom-table .slds-table tbody tr td {
+    text-align: center;
+    padding: 8px;
+}
+
+/* Styles for form indicators */
+.form-indicator {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    line-height: 24px;
+    color: #fff;
+    text-align: center;
+    margin-right: 4px;
+}
+
+.form-W {
+    background-color: #28a745; /* Green for Win */
+}
+
+.form-D {
+    background-color: #ffc107; /* Yellow for Draw */
+}
+
+.form-L {
+    background-color: #dc3545; /* Red for Loss */
+}
+
+.lightning-datatable .slds-button {
+    cursor: pointer;
+}
+
+.lightning-datatable .slds-button:hover {
+    background-color: #d8e1e8; /* Optional: change background on hover */
+}
