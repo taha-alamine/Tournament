@@ -1,6 +1,5 @@
 public with sharing class TeamData {
 
-
     @AuraEnabled(cacheable=true)
     public static List<Team__c> getTeam(Id matchId) {
         List<Team__c> Team = new List<Team__c>();

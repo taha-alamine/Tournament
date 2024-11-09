@@ -1,17 +1,16 @@
-trigger CreateGroup on Match__c (before insert) {
+trigger CreateGroup on Match__c (before update) {
     for (Match__c match : Trigger.new) {
-        if (match.Group_Name__c == null) {
-            // Generate a unique external ID
+        if (match.Tournament_Group__c == null) {
+
             String uniqueId = 'Group_' + String.valueOf(Math.random()).substring(2, 6);
 
-            // Create a new Group record
-            Group__c newGroup = new Group__c();
-            newGroup.Name = 'New Group'; // Replace with appropriate name
+
+            Tournament_Group__c newGroup = new Tournament_Group__c();
+            newGroup.Name = 'New Group'; 
             newGroup.External_ID__c = uniqueId;
             insert newGroup;
 
-            // Assign the new Group to the Match record
-            match.Group_Name__c = newGroup.Id;
+            match.Tournament_Group__c = newGroup.Id;
         }
     }
 }
