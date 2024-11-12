@@ -1,0 +1,145 @@
+/* Container for the match card */
+.match-card-container {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #222; /* Dark background for the card */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover effect on the match card */
+.match-card-container:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+/* Styling for the match date */
+.match-date {
+    font-size: 1.3rem;
+    color: #e0e0e0;  /* Light grey for the date */
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Styling for the match teams section */
+.match-teams {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Each team's block */
+.team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 2rem;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect on the team blocks */
+.team:hover {
+    transform: scale(1.05);
+}
+
+/* Team name styling */
+.team-name {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;  /* Uppercase team names */
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+/* Score styling */
+.score {
+    font-size: 2rem;
+    color: #fff;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    background-color: #444; /* Dark background for the score */
+    min-width: 60px; /* Minimum width to keep score centered */
+}
+
+/* VS text styling */
+.vs {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+    margin: 0 1rem;
+}
+
+/* Styling for the penalty text below the score */
+.penalty {
+    font-size: 1.4rem;
+    color: #FFD700;  /* Gold color for the penalty */
+    font-weight: bold;
+    margin-top: 0.5rem; /* Margin below the score */
+}
+
+
+@media (max-width: 768px) {
+    .match-teams {
+        flex-direction: column; 
+    }
+
+    .team {
+        margin: 1rem 0; 
+    }
+
+    .vs {
+        margin: 1rem 0; 
+    }
+
+    .match-date {
+        font-size: 1.1rem; 
+    }
+
+    .score {
+        font-size: 1.8rem; 
+    }
+
+    .penalty {
+        font-size: 1.2rem; 
+    }
+}
+
+
+lightning-card {
+    background-color: #333 !important; /* Apply dark background */
+    border: none !important; /* Remove border */
+    border-radius: 10px;
+}
+
+lightning-card .slds-card__header {
+    background-color: #444; /* Darker header background */
+    border-radius: 10px 10px 0 0;
+}
+
+lightning-card .slds-card__body {
+    background-color: #333; /* Ensuring the body has the same dark background */
+}
+
+lightning-card .slds-card__footer {
+    background-color: #444; /* If you have a footer, make it dark too */
+}
+/* Adding some spacing to the match date and teams */
+.match-card-container .match-teams .team-name {
+    margin-bottom: 0.5rem;
+}
+
+/* Card title and content text */
+lightning-card h1 {
+    color: #fff; /* White color for the title */
+}
+
+lightning-card .slds-card__body p {
+    color: #ddd; /* Light grey color for body text */
+}
+
+lightning-card .slds-card__header {
+    color: #fff; /* Ensuring header text is white */
+}

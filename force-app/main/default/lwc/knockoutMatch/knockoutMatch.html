@@ -1,0 +1,39 @@
+<template>
+    <lightning-card title="Knockout Stage Results" icon-name="standard:sports_hub">
+        <template if:true={knockoutMatches}>
+            <template for:each={knockoutMatches} for:item="round" for:index="index">
+                <div key={round.roundName} class="round">
+                    <h3>{round.roundName}</h3>
+                    <!-- Loop through matches in the specific round -->
+                    <template for:each={round.matches} for:item="match" for:index="matchIndex">
+                        <div key={match.matchId} class="match-card">
+                            <div class="match-date">{match.matchTime}</div>
+            
+                            <!-- Teams and Score -->
+                            <div class="match-teams">
+                                <div class="team">
+                                    <span class="team-name">{match.teamAName}</span>
+                                    <span class="score">{match.teamAScore}</span>
+                                </div>
+                                <span class="vs">vs</span>
+                                <div class="team">
+                                    <span class="team-name">{match.teamBName}</span>
+
+                                    <span class="score">{match.teamBScore}</span>
+                                </div>
+                            </div>
+            
+                            <!-- Penalty -->
+                            <template if:true={match.penalty}>
+                                <div class="penalty">{match.penalty}</div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </template>
+        <template if:false={knockoutMatches}>
+            <p>No knockout stage results found.</p>
+        </template>
+    </lightning-card>
+</template>
