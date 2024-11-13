@@ -27,54 +27,45 @@ export default class GroupTable extends LightningElement {
     @track groupList;
     error;
 
-    
-    @wire(getRecord, { recordId: '$recordId', fields: [TOURNAMENT_GROUP_NAME_FIELD] })
-    store({ error, data }) {
-        if (data) {
-            console.log("Just Wired", data)
-            this.record = data;
-            this.error = undefined;
-            this.currentGroup = this.name ;
-        } else if (error) {
-            this.error = error;
-            this.record = undefined;
-        }
-    }
-
-    get name() {
-        return this.record.fields.Group_Name__c.value;
-    }
 
     @wire(getTeamsByGroup, { groupId: '$recordId' })
     wiredGroups(value) {
-        // Destructure the provisioned value 
         const { data, error } = value;
         if (data) {
-            // Map the data in the datatable
             let groupData = [];
             console.log("WiredGroup", data);
-            data.forEach(element => {
+            let topTeams = [data[0], data[1]];  // Top 2 teams
+            data.forEach((element, index) => {
                 let tableRow = {};
                 tableRow.teams = element.Name;
                 tableRow.wins = element.Won__c;
                 tableRow.losses = element.Lost__c;
-                tableRow.played =  element.Played__c;
-                tableRow.drawn =  element.Drawn__c;
-                tableRow.goalsFor =  element.Goals_For__c;
-                tableRow.goalsAgainst =  element.Goals_Against__c;
-                tableRow.points = element.Point__c;;
+                tableRow.played = element.Played__c;
+                tableRow.draws = element.Drawn__c;
+                tableRow.goalsFor = element.Goals_For__c;
+                tableRow.goalsAgainst = element.Goals_Against__c;
+                tableRow.goalDifference = element.Goals_For__c - element.Goals_Against__c;
+                tableRow.points = element.Points__c;
+
+                // Add a green circle for the top 2 teams
+                tableRow.top2 = (topTeams.includes(element)) ? '🏆' : ''; // Add green circle for the top two teams
+
                 groupData.push(tableRow);
             });
-            console.log("$Data", data);
+            console.log("$Data", JSON.stringify(groupData));
             this.groupList = groupData;
         } else if (error) {
             this.error = error;
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Error loading teams',
+                    message: error.message,
+                    variant: 'error',
+                }),
+            );
         }
     }
 
     
-    // get name(){
-    //     console.log(this.record.fields);
-    // }
 
 }

@@ -1,6 +1,5 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getAllGroups from '@salesforce/apex/TournamentGroups.getAllGroups';
-//import getGroupName from '@salesforce/apex/TournamentGroups.getGroupName';
 import { NavigationMixin } from 'lightning/navigation';
 
 const columns = [
@@ -45,17 +44,6 @@ export default class GroupStandings extends NavigationMixin(LightningElement) {
         });
     }
 
-    // fetchRecordName(recordId){
-    //     getRecordNameById({ recordId })
-    //         .then(name => {
-    //             this.groupNames.push(name); // Assign the name to a variable
-    //             console.log('Record Name:', this.recordName); // Optional: Log the name
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching record name:', error);
-    //         });
-    // };
-
     @wire(getAllGroups, { tournamentId: '$recordId' })
     groupsStandingHandler(value){
         const {data, error}  = value;
@@ -67,32 +55,28 @@ export default class GroupStandings extends NavigationMixin(LightningElement) {
                 let groupData = []
                 data[element].forEach(e => {
                     let tableRow = {};
-                   // tableRow.group = element;
                     tableRow.id = e.Id;
                     tableRow.teams = e.Name;
                     tableRow.wins = e.Won__c;
                     tableRow.losses = e.Lost__c;
                     tableRow.played =  e.Played__c;
-                    tableRow.drawn =  e.Drawn__c;
+                    tableRow.draws =  e.Drawn__c;
                     tableRow.goalsFor =  e.Goals_For__c;
                     tableRow.goalsAgainst =  e.Goals_Against__c;
-                    tableRow.points = e.Point__c;
+                    tableRow.goalDifference = e.Goals_For__c - e.Goals_Against__c;
+                    tableRow.points = e.Points__c;
                     groupData.push(tableRow);
                 })
                 groupStandings.Id = data[element][0].Tournament_Group__c;
                 groupStandings.group= element;
                 groupStandings.teams = groupData;
                 standind.push(groupStandings);
-                console.log("groupStandinfdkjsdbf", JSON.stringify(groupStandings));
             }
-
             this.groups = groupNames;
             this.groupStanding = standind;
-            
             return data;
         }
     }
-
 
 
     handleRowAction(event) {

@@ -11,13 +11,11 @@ export default class TeamList extends LightningElement {
     @api recordId;
     @wire(getTeamsByGroup, { groupId: '$recordId' })
     teamsDetailsHandler({data, error}){
-        //console.log("###############", JSON.stringify(data));
         this.teams = data;
     }
 
     @wire(getTeam)
     teamsDataHandler({data, error}){
-        //console.log("###############", JSON.stringify(data));
         console.log("111111111 details and points ", data)
         this.teamsData = data;
     }

@@ -1,0 +1,20 @@
+<template>
+    <template if:true={tournamentFormats}>
+        <div class="format-list">
+            <h2 class="header">Tournament Formats and Rules</h2>
+            <ul class="format-list-items">
+                <template for:each={tournamentFormats} for:item="format">
+                    <li key={format.id} class="format-item">
+                        <p class="format-name">{format.name}</p>
+                        <p class="format-rule">
+                            <lightning-formatted-rich-text value={format.rule}></lightning-formatted-rich-text>
+                        </p>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </template>
+    <template if:true={error}>
+        <p class="error-message">Error loading tournament formats: {error}</p>
+    </template>
+</template>

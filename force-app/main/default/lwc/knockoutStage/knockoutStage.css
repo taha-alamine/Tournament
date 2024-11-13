@@ -1,0 +1,28 @@
+.custom-card {
+    background-color: #2a2a2a; /* Dark background for the card */
+    color: rgb(8, 6, 6);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.match-card {
+    background-color: #34495E; /* Slightly lighter dark background for matches */
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: #ecf0f1; /* Light text color */
+}
+
+.match-card p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.slds-text-color_error {
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+    padding: 10px;
+    text-align: center;
+}

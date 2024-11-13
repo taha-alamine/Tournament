@@ -1,0 +1,118 @@
+
+.matches-card {
+    --slds-c-card-body-padding: 0;
+}
+
+.matches-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #142641;
+    color: #f6c358;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.league-info {
+    display: flex;
+    align-items: center;
+}
+
+.standings-link {
+    color: #f6c358;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.standings-link:hover {
+    text-decoration: underline;
+}
+
+
+.match-list {
+    padding: 0.5rem 1rem;
+    background-color: #1e2b48;
+}
+
+
+.match-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.match-date-time {
+    width: 20%;
+    color: #aaa;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.team-details {
+    display: flex;
+    align-items: center;
+    width: 60%;
+}
+
+.team {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.flag {
+    margin-right: 0.3rem;
+    font-size: 1.2rem;
+}
+
+.home-team {
+    color: #f6c358;
+    text-align: right;
+}
+
+.opponent-team {
+    color: #ffffff;
+    text-align: left;
+    margin-left: 0.5rem;
+}
+
+.match-score {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0 1rem;
+}
+
+.separator {
+    margin: 0 0.3rem;
+}
+
+/* Result Indicator */
+.match-result {
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+    width: 10%;
+}
+
+.match-result.W {
+    background-color: #4caf50;
+    color: white;
+}
+
+.match-result.D {
+    background-color: #ff9800;
+    color: white;
+}
+
+.match-result.L {
+    background-color: #f44336;
+    color: white;
+}

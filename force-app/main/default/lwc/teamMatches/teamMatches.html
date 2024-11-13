@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Matches" class="matches-card">
+        <div class="matches-header">
+            <span class="league-info">EUROPE: UEFA Nations League - League A</span>
+            <a href="#" class="standings-link">Standings</a>
+        </div>
+        <div class="match-list">
+            <template for:each={matches} for:item="match">
+                <div key={match.Id} class="match-item">
+                    <!-- Date and Time -->
+                    <div class="match-date-time">
+                        <span class="match-date">{match.Match_Time__c}</span>
+                        <span class="match-time">19:45</span>
+                    </div>
+                    <!-- Team and Score Details -->
+                    <div class="team-details">
+                        <!-- Home Team and Flag -->
+                        <div class="team home-team">
+                            <span class="team-name">{match.Home_Team__r.Name}</span>
+                        </div>
+                        <!-- Score -->
+                        <div class="match-score">
+                            <span class="team-score">{match.Goals_Home_Team__c}</span>
+                            <span class="separator">-</span>
+                            <span class="opponent-score">{match.Goals_Away_Team__c}</span>
+                        </div>
+                        <div class="team away-team">
+                            <span class="team-name">{match.Away_Team__r.Name}</span>
+                        </div>
+                    </div>
+                    <!-- Match Result -->
+                    <div class="match-result {match.Result__c}">{match.Result__c}</div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

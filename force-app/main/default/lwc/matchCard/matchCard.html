@@ -1,14 +1,25 @@
 <template>
-    <div class="match-result">
-        <div class="team-container">
-            <p>homeTeamName</p>
+    <lightning-card title="Match Result">
+        <div class="match-container">
+            <div class="match-date">
+                <span>{matchTime}</span>
+            </div>
+            <div class="match-teams">
+                <div class="team">
+                    <span class="team-name">{homeTeamName}</span>
+                    <span class="team-score">{matchResultHome}</span>
+                </div>
+                
+                <div class="arrow">-</div>
+                
+                <div class="team">
+                    <span class="team-name">{awayTeamName}</span>
+                    <span class="team-score">{matchResultAway}</span>
+                </div>
+            </div>
+            <div class="match-location">
+                <span>{location}</span>
+            </div>
         </div>
-        <div class="score-container">
-            <p>matchDate</p>
-            <p>score</p>
-        </div>
-        <div class="team-container">
-            <p>awayTeamName</p>
-        </div>
-    </div>
+    </lightning-card>
 </template>

@@ -1,23 +1,26 @@
 <template>
-
-    <lightning-card title={currentGroup}>
+    <lightning-card title={currentGroup} class="group-card">
         <template if:true={record}>
             <div class="slds-m-around_medium">
+                <p class="group-name">{currentGroup}</p>
             </div>
         </template>
     </lightning-card>
-    <lightning-card title="Group !{currentGroup} Results" class="custom-card">
-    <template if:true={recordId}>
-        <lightning-datatable
-            key-field="Id"
-            data={groupList}
-            columns={columns}
-            class="custom-table"
-        >
-        </lightning-datatable>
-    </template>
-    <!-- <template if:true={error}>
-        fdssf
-    </template> -->
+    
+    <lightning-card title="Group Standing" class="custom-card">
+        <template if:true={recordId}>
+            <lightning-datatable
+                key-field="Id"
+                data={groupList}
+                columns={columns}
+                class="custom-table"
+            >
+            </lightning-datatable>
+        </template>
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-text-heading_small">
+                Error loading group standings: {error.message}
+            </div>
+        </template>
     </lightning-card>
 </template>
