@@ -11,7 +11,6 @@ public with sharing class KnockoutStageController {
             ORDER BY Knockout_Stage__r.Name, Match_Time__c
         ];
 
-        
         Map<String, List<Map<String, Object>>> groupedMatches = new Map<String, List<Map<String, Object>>>();
         List<Map<String, Object>> matchesByKnockout = new List<Map<String, Object>>();
         
@@ -42,8 +41,6 @@ public with sharing class KnockoutStageController {
             round.put('matches', groupedMatches.get(roundn));
             rounds.add(round);
         }
-
-        System.debug('Rounds Returned: ' + rounds); 
 
         return rounds;
         
