@@ -2,9 +2,9 @@
     <lightning-card title="Knockout Stages">
         <template if:true={knockoutStages}>
             <template for:each={knockoutStages} for:item="stage">
-                <lightning-card key={stage.stageName} title={stage.stageName} class="custom-card">
-                    <template for:each={stage.matches} for:item="match">
-                        <div key={match.matchId} class="match-card">
+                <lightning-card key={stage.stageName} title={stage.stageName} class="custom-card" onclick={handleRowAction}>
+                    <template for:each={stage.matches} for:item="match" >
+                        <div key={match.matchId} class="match-card"  >
                             <p><strong>{match.homeTeam}</strong> vs <strong>{match.awayTeam}</strong></p>
                             <p>Result: {match.result}</p>
                             <p>Match Time: {match.matchTime}</p>

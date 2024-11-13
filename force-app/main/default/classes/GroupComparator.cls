@@ -12,9 +12,9 @@ public class GroupComparator implements Comparator<Tournament_Group__c> {
             returnValue = -1;
         } else if (o2.Name == null){
             returnValue = 1;
-        } else if (o1.Name > o2.Name) {
-            returnValue = -1;
         } else if (o1.Name < o2.Name) {
+            returnValue = -1;
+        } else if (o1.Name > o2.Name) {
             returnValue = 1;
         }
         return returnValue;

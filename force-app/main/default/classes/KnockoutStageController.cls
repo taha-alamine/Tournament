@@ -1,49 +1,40 @@
 public with sharing class KnockoutStageController {
 
     @AuraEnabled(cacheable=true)
-    public static List<Map<String, Object>>  getKnockoutMatchesByStage(Id knockoutStageId) {
-        List<Match__c> matches = [
-            SELECT Id, Match_Time__c, Knockout_Stage__r.Name, Knockout_Stage__c, 
-                   Home_Team__r.Name, Away_Team__r.Name, Goals_Home_Team__c, Goals_Away_Team__c, 
-                   Penalties__c
-            FROM Match__c
-            WHERE Knockout_Stage__c = :knockoutStageId
-            ORDER BY Knockout_Stage__r.Name, Match_Time__c
-        ];
+    public static List<Map<String, Object>> getKnockoutStagesWithMatches(Id tournamentId) {
+        List<Map<String, Object>> result = new List<Map<String, Object>>();
 
-        Map<String, List<Map<String, Object>>> groupedMatches = new Map<String, List<Map<String, Object>>>();
-        List<Map<String, Object>> matchesByKnockout = new List<Map<String, Object>>();
         
-       // String roundName = matches[0].Knockout_Stage__r.Name;
-        for (Match__c match : matches) {
-            Map<String, Object> matchData = new Map<String, Object>();
-            matchData.put('matchId', match.Id);
-            matchData.put('matchTime', match.Match_Time__c);
-            matchData.put('teamAName', match.Home_Team__r.Name);
-            matchData.put('teamBName', match.Away_Team__r.Name);
-            matchData.put('teamAScore', match.Goals_Home_Team__c);
-            matchData.put('teamBScore', match.Goals_Away_Team__c);
-            matchData.put('penalty', match.Penalties__c != null ? match.Penalties__c : '');
+        List<Knockout_Stage__c> knockoutStages = [SELECT Id, Name FROM Knockout_Stage__c WHERE tournament__c =: tournamentId];
+
+        
+        for (Knockout_Stage__c stage : knockoutStages) {
+            Map<String, Object> stageData = new Map<String, Object>();
+            stageData.put('stageName', stage.Name);
 
             
-            String roundName = match.Knockout_Stage__r.Name;
-            if (!groupedMatches.containsKey(roundName)) {
-                groupedMatches.put(roundName, new List<Map<String, Object>>());
+            List<Match__c> matches = [SELECT Id, Home_Team__r.Name, Away_Team__r.Name, Result__c, Match_Time__c 
+                                      FROM Match__c 
+                                      WHERE Knockout_Stage__c = :stage.Id];
+
+            List<Map<String, String>> matchDetails = new List<Map<String, String>>();
+
+            
+            for (Match__c match : matches) {
+                Map<String, String> matchData = new Map<String, String>();
+                matchData.put('matchId', match.Id);
+                matchData.put('homeTeam', match.Home_Team__r.Name);
+                matchData.put('awayTeam', match.Away_Team__r.Name);
+                matchData.put('result', match.Result__c);
+                matchData.put('matchTime', String.valueOf(match.Match_Time__c));
+                matchDetails.add(matchData);
             }
-            groupedMatches.get(roundName).add(matchData);
+
+            stageData.put('matches', matchDetails);
+            result.add(stageData);
         }
 
-
-        List<Map<String, Object>> rounds = new List<Map<String, Object>>();
-        for (String roundn : groupedMatches.keySet()) {
-            Map<String, Object> round = new Map<String, Object>();
-            round.put('roundName', roundn);
-            round.put('matches', groupedMatches.get(roundn));
-            rounds.add(round);
-        }
-
-        return rounds;
-        
+        return result;
     }
 }
 

@@ -3,6 +3,7 @@ public with sharing class GroupTeams {
     @AuraEnabled(cacheable=true)
     public static  List<Team__c> getTeamsByGroup(Id groupId) {
         List<Team__c> teams = [SELECT Id, Name, Goals_For__c, Goals_Against__c, Played__c, Won__c, Lost__c, Drawn__c, Points__c, Tournament_Group__c FROM Team__c WHERE Tournament_Group__c = :groupId];
+        teams.sort(new TeamComparator());
         return teams;
     }
 

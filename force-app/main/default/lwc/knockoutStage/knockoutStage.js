@@ -1,5 +1,6 @@
 import { LightningElement, track, wire, api} from 'lwc';
 import getKnockoutStagesWithMatches from '@salesforce/apex/KnockoutStageController.getKnockoutStagesWithMatches';
+import { NavigationMixin } from 'lightning/navigation';
 
 export default class KnockoutStage extends LightningElement {
     @api recordId;
@@ -18,4 +19,34 @@ export default class KnockoutStage extends LightningElement {
             this.knockoutStages = [];
         }
     }
+
+    navigateToKnockoutRecord(event) {
+        const knockoutId = event.currentTarget.dataset.knockoutId;
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: knockoutId,
+                actionName: 'view'
+            }
+        });
+    }
+    handleRowAction(event) {
+        event.stopPropagation();
+        const actionName = event.detail.action.name;
+        const row = event.detail.matches;
+        if (actionName === 'navigateToMatch') {
+            this.navigateToMatchRecord(row.id);
+        }
+    }
+
+    navigateToMatchRecord(matchId) {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: matchId,
+                actionName: 'view'
+            }
+        });
+    }
+
 }

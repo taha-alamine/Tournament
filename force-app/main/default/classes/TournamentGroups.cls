@@ -1,7 +1,8 @@
 public with sharing class TournamentGroups {
     @AuraEnabled(cacheable=true)
     public static Map<String,  List<Team__c>> getAllGroups(Id tournamentId) {
-        List<Tournament_Group__c> groups = [SELECT Id FROM Tournament_Group__c WHERE tournament__c = :tournamentId];
+        List<Tournament_Group__c> groups = [SELECT Id, Name FROM Tournament_Group__c WHERE tournament__c = :tournamentId];
+        groups.sort(new GroupComparator());
         return getStandingGroups(tournamentId, groups);
     }
 

@@ -6,11 +6,11 @@ public with sharing class TeamData {
 
         List<Match__c> matches = [SELECT Id, Home_Team__c, Away_Team__c, Goals_Home_Team__c, Goals_Away_Team__c FROM Match__c WHERE Id = :matchId];
 
-        // Group matches by Home Team and Away Team
+       
         Map<Id, Team__c> TeamMap = new Map<Id, Team__c>();
 
         for (Match__c match : matches) {
-            // Update Home Team's data
+            
             Team__c homeTeam = TeamMap.get(match.Home_Team__c);
             if (homeTeam == null) {
                 homeTeam = new Team__c();
@@ -25,7 +25,7 @@ public with sharing class TeamData {
             homeTeam.Drawn__c += match.Goals_Home_Team__c == match.Goals_Away_Team__c ? 1 : 0;
             homeTeam.Points__c += match.Goals_Home_Team__c > match.Goals_Away_Team__c ? 3 : (match.Goals_Home_Team__c == match.Goals_Away_Team__c ? 1 : 0);
 
-            // Update Away Team's data
+            
             Team__c awayTeam = TeamMap.get(match.Away_Team__c);
             if (awayTeam == null) {
                 awayTeam = new Team__c();

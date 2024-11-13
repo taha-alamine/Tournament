@@ -1,13 +1,20 @@
 public with sharing class MatchData {
 
     @AuraEnabled(cacheable=true)
-    public static Match__c getMatchData(Id matchId) {
-        // Logic to fetch match data from database or API
-        //Match__c matchData = new Match__c();
+    public static Map<String, Object> getMatchData(Id matchId) {
+        Match__c match = [SELECT Id, Name, Result__c, Match_Time__c, Location__c,
+            Home_Team__r.Name, Away_Team__r.Name
+            FROM Match__c 
+            WHERE Id = :matchId LIMIT 1];
 
-        Match__c match = [SELECT Id, Name, Result__c, Match_Time__c, Location__c, Home_Team__c, Away_Team__c FROM Match__c WHERE Id = :matchId];
-        
-        // ... populate matchData fields
-        return match;
+        Map<String, Object> matchData = new Map<String, Object>();
+        matchData.put('matchId', match.Id);
+        matchData.put('result', match.Result__c);
+        matchData.put('matchTime', match.Match_Time__c);
+        matchData.put('location', match.Location__c);
+        matchData.put('homeTeamName', match.Home_Team__r.Name);
+        matchData.put('awayTeamName', match.Away_Team__r.Name);
+
+        return matchData;
     }
 }
